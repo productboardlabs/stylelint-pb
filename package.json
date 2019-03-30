@@ -1,17 +1,21 @@
 {
-  "name": "stylelint-pb",
-  "version": "1.0.0",
+  "name": "@productboard/stylelint-pb",
+  "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "start": "yarn run build --watch"
+    "test": "jest"
   },
   "peerDependencies": {
     "stylelint": ">=9"
   },
   "devDependencies": {
-    "stylelint-test-rule-tape": "0.2.0",
-    "typescript": "3.4.1"
+    "all-contributors-cli": "^6.2.0",
+    "jest": "^24.5.0",
+    "lodash": "^4.17.11",
+    "stylelint": "^9.10.1"
+  },
+  "dependencies": {
+    "color": "^3.1.0"
   }
 }
