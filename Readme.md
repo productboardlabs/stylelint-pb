@@ -1,6 +1,8 @@
 # Stylelint-PB
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)
+[![codecov](https://codecov.io/gh/productboardlabs/stylelint-pb/branch/master/graph/badge.svg)](https://codecov.io/gh/productboardlabs/stylelint-pb/)
+
 
 Set (TODO) of our custom made rules for Stylelint. 🚀
 
