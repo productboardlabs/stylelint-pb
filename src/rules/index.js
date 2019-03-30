@@ -1,7 +1,7 @@
 const stylelint = require("stylelint");
 const color = require("color");
 
-const ruleName = "@productboardlabs/rule1";
+const ruleName = "@productboardlabs/smart-color-replacement";
 
 const messages = stylelint.utils.ruleMessages(ruleName, {
   expected: failedColors =>
@@ -75,8 +75,4 @@ const rule = function(expectation, _, context) {
 rule.ruleName = ruleName;
 rule.messages = messages;
 
-module.exports = {
-  rule,
-  ruleName,
-  messages
-};
+module.exports = rule;

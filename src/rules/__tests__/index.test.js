@@ -1,7 +1,7 @@
-const { rule, messages, ruleName } = require("../index");
+const rule = require("../index");
 
 testRule(rule, {
-  ruleName,
+  ruleName: rule.ruleName,
   config: [
     {
       "@snowWhite": "#f4f5e2"
