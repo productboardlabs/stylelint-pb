@@ -44,6 +44,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "eukarpov",
+      "name": "Evgeny Karpov",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1791423?v=4",
+      "profile": "https://kmaps.co/author/eukarpov/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
