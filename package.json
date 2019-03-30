@@ -1,0 +1,17 @@
+{
+  "name": "stylelint-pb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "yarn run build --watch"
+  },
+  "peerDependencies": {
+    "stylelint": ">=9"
+  },
+  "devDependencies": {
+    "stylelint-test-rule-tape": "0.2.0",
+    "typescript": "3.4.1"
+  }
+}
