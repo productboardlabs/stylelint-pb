@@ -1,4 +1,5 @@
-import stylelint from "stylelint";
+import * as stylelint from "stylelint";
+import * as color from "color";
 
 export const ruleName = "color-hex-case";
 
@@ -6,8 +7,61 @@ export const messages = stylelint.utils.ruleMessages(ruleName, {
   expected: "Error"
 });
 
-const rule = function(expectation, options, context) {
-  return (root, result) => {};
+interface Declaration {
+  value: string;
+  prop: string;
+}
+
+const rule = function(expectation: unknown, options, context) {
+  return (root, result) => {
+    const HEX_REGEX = /(#[a-f0-9]{3,6})/gi;
+    const RGB_REGEX = /(rgb|rgba)\([^\)]*\)/gi;
+    const HSL_REGEX = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/gi;
+
+    const patterns: RegExp[] = [HEX_REGEX, RGB_REGEX, HSL_REGEX];
+
+    if (typeof expectation !== "object" || !expectation) return;
+
+    root.walkDecls((declaration: Declaration) => {
+      const { value } = declaration;
+      const colors = patterns.reduce(
+        (acc, c) => {
+          const matches = value.match(c);
+          if (matches && matches.length > 0) {
+            const colors = matches.map(m => color(m).hex());
+            acc.push(...colors);
+          }
+
+          return acc;
+        },
+        [] as Array<string>
+      );
+
+      //   colors.forEach(color => {
+      //     color === color();
+      //   });
+      console.log("debug", colors);
+
+      const lookUpObject = Object.entries(expectation).reduce(
+        (acc, [key, value]) => {
+          acc[value.toUpperCase()] = key;
+
+          return acc;
+        },
+        {} as { [key: string]: string }
+      );
+
+      const results = colors.map(c => ({
+        valid: !lookUpObject[c],
+        used: c,
+        suggested: lookUpObject[c] || null
+      }));
+
+      const 
+
+      console.log("car", results);
+    });
+  };
 };
 
 rule.ruleName = ruleName;

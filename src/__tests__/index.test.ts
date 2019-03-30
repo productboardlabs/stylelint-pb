@@ -28,13 +28,6 @@ testRule(rule, {
       message: "You are a bad variable user",
       line: 1,
       column: 12
-    },
-    {
-      code: "a { color: #000F }",
-
-      message: "You are a bad variable user",
-      line: 1,
-      column: 16
     }
   ]
 });
