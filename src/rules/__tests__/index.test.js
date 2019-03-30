@@ -26,7 +26,7 @@ testRule(rule, {
       fixed: "a { color: @snowWhite; }",
       description: "Variables should be used",
       message:
-        'Colour "#f4f5e2" should be "@snowWhite". (@productboardlabs/rule1)',
+        'Colour "#f4f5e2" should be "@snowWhite". (@productboardlabs/smart-color-replacement)',
       line: 1
     },
     {
@@ -34,8 +34,20 @@ testRule(rule, {
       fixed: "a { background: @snowWhite; }",
       description: "Variables should be used",
       message:
-        'Colour "rgb(244, 245, 226)" should be "@snowWhite". (@productboardlabs/rule1)',
+        'Colour "rgb(244, 245, 226)" should be "@snowWhite". (@productboardlabs/smart-color-replacement)',
       line: 1
+    }
+  ]
+});
+
+testRule(rule, {
+  ruleName: rule.ruleName,
+  fix: true,
+
+  accept: [
+    {
+      code: "a { font-size: 3rem; }",
+      description: "No variable is OK"
     }
   ]
 });

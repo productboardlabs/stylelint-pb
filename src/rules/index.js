@@ -49,7 +49,7 @@ const rule = function(expectation, _, context) {
       const results = colors.map(({ sanitized, original }) => ({
         valid: !lookUpObject[sanitized],
         used: original,
-        suggested: lookUpObject[sanitized] || null
+        suggested: lookUpObject[sanitized]
       }));
 
       const failedColors = results.filter(res => !res.valid);
