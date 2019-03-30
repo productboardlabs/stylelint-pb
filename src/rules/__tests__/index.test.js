@@ -4,7 +4,7 @@ testRule(rule, {
   ruleName,
   config: [
     {
-      snowWhite: "#f4f5e2"
+      "@snowWhite": "#f4f5e2"
     }
   ],
   fix: true,
@@ -26,7 +26,15 @@ testRule(rule, {
       fixed: "a { color: @snowWhite; }",
       description: "Variables should be used",
       message:
-        'Colour "#F4F5E2" should be "snowWhite". (@productboardlabs/rule1)',
+        'Colour "#f4f5e2" should be "@snowWhite". (@productboardlabs/rule1)',
+      line: 1
+    },
+    {
+      code: "a { background: rgb(244, 245, 226); }",
+      fixed: "a { background: @snowWhite; }",
+      description: "Variables should be used",
+      message:
+        'Colour "rgb(244, 245, 226)" should be "@snowWhite". (@productboardlabs/rule1)',
       line: 1
     }
   ]

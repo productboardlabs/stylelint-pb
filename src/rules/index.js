@@ -27,7 +27,10 @@ const rule = function(expectation, _, context) {
       const colors = patterns.reduce((acc, c) => {
         const matches = value.match(c);
         if (matches && matches.length > 0) {
-          const colors = matches.map(m => color(m).hex());
+          const colors = matches.map(m => ({
+            sanitized: color(m).hex(),
+            original: m
+          }));
           acc.push(...colors);
         }
 
@@ -43,10 +46,10 @@ const rule = function(expectation, _, context) {
         {}
       );
 
-      const results = colors.map(c => ({
-        valid: !lookUpObject[c],
-        used: c,
-        suggested: lookUpObject[c] || null
+      const results = colors.map(({ sanitized, original }) => ({
+        valid: !lookUpObject[sanitized],
+        used: original,
+        suggested: lookUpObject[sanitized] || null
       }));
 
       const failedColors = results.filter(res => !res.valid);
@@ -58,9 +61,13 @@ const rule = function(expectation, _, context) {
           result,
           ruleName
         });
-      }
 
-      console.log(context.fix);
+        if (context.fix) {
+          failedColors.forEach(({ used, suggested }) => {
+            declaration.value = declaration.value.replace(used, suggested);
+          });
+        }
+      }
     });
   };
 };

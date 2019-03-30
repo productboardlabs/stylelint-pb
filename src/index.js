@@ -1,4 +1,4 @@
 const { createPlugin } = require("stylelint");
-const rule1 = require("./rules").rule;
+const { rule } = require("./rules");
 
-module.exports = createPlugin("@productboardlabs/rule1", rule1);
+module.exports = createPlugin("@productboardlabs/rule1", rule);
