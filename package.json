@@ -5,12 +5,14 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "yarn run build --watch"
+    "start": "yarn run build --watch",
+    "test": "node build/__tests__/index.test.js"
   },
   "peerDependencies": {
     "stylelint": ">=9"
   },
   "devDependencies": {
+    "@types/stylelint": "^9.10.0",
     "stylelint-test-rule-tape": "0.2.0",
     "typescript": "3.4.1"
   }
