@@ -22,7 +22,7 @@ const rule = function(expectation: unknown, options, context) {
 
     if (typeof expectation !== "object" || !expectation) return;
 
-    root.walkDecls((declaration: Declaration) => {
+    root.walkDecls((declaration: any) => {
       const { value } = declaration;
       const colors = patterns.reduce(
         (acc, c) => {
@@ -57,9 +57,17 @@ const rule = function(expectation: unknown, options, context) {
         suggested: lookUpObject[c] || null
       }));
 
-      const 
+      const isError = results.some(r => !r.valid);
 
-      console.log("car", results);
+      if (isError) {
+        stylelint.utils.report({
+          message: "You are a bad variable user",
+          node: declaration,
+          result,
+          ruleName
+        });
+      }
+      console.log("car", isError);
     });
   };
 };

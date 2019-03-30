@@ -26,8 +26,7 @@ testRule(rule, {
       fixed: "a { color: @snowWhite; }",
 
       message: "You are a bad variable user",
-      line: 1,
-      column: 12
+      line: 1
     }
   ]
 });
