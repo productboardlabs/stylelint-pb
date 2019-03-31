@@ -32,9 +32,11 @@ Example configuration. 👇
 ```js
 {
     rules: {
-        "@productboardlabs/smart-color-replacement": {
-            "@snowWhite": "#f4f5e2"
-        }
+        "@productboard/smart-color-replacement": [
+            {
+                "@snowWhite": "#f4f5e2"
+            }
+        ]
     }
 }
 ```
@@ -43,11 +45,16 @@ You can also run this rule in **strict mode** which means that there is no other
 
 ```js
 {
-    rules: {
-        "@productboardlabs/smart-color-replacement": [{
-            "@snowWhite": "#f4f5e2"
-        }, "strictMode"]
-    }
+  "rules": {
+    "@productboard/smart-color-replacement": [
+      {
+        "@white": "#ffffff"
+      },
+      {
+        "strictMode": true
+      }
+    ]
+  }
 }
 ```
 

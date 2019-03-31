@@ -2,7 +2,7 @@ const stylelint = require("stylelint");
 const color = require("color");
 
 const HEX_REGEX = /(#[a-f0-9]{3,6})/gi;
-const RGB_REGEX = /(rgb|rgba)\([^\)]*\)/gi;
+const RGB_REGEX = /rgb\([^\)]*\)/gi;
 const HSL_REGEX = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/gi;
 
 const ruleName = "@productboard/smart-color-replacement";
@@ -14,7 +14,7 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
       .join(" ")
 });
 
-const rule = function(configuration, strictMode, context) {
+const rule = function(configuration, { strictMode = false } = {}, context) {
   return (root, result) => {
     if (typeof configuration !== "object" || !configuration) return;
 
@@ -40,18 +40,27 @@ const rule = function(configuration, strictMode, context) {
         return acc;
       }, []);
 
-      const results = colors.map(used => {
-        const sanitized = color(used).hex();
-        return {
+      const results = colors.reduce((acc, v, i) => {
+        let sanitized;
+        try {
+          sanitized = color(v).hex();
+        } catch (e) {
+          // ignore non-parsable colors
+          return acc;
+        }
+
+        acc.push({
           valid: lookUpObject[sanitized]
             ? !lookUpObject[sanitized]
-            : strictMode !== "strictMode",
+            : !strictMode,
           suggested: lookUpObject[sanitized],
-          used
-        };
-      });
+          used: v
+        });
 
-      const failedColors = results.filter(res => !res.valid);
+        return acc;
+      }, []);
+
+      const failedColors = results.filter(({ valid }) => !valid);
 
       if (failedColors.length) {
         stylelint.utils.report({

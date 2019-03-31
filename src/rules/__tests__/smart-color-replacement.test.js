@@ -37,6 +37,10 @@ testRule(rule, {
     {
       code: "a { color: #333333; }",
       description: "Color out of the config should be ignored by default"
+    },
+    {
+      code: "a { box-shadow: 0 1px 2px rgb(broken, 0.3); }",
+      description: "non-parsable colors should be ignored"
     }
   ],
 
@@ -86,9 +90,16 @@ testRule(rule, {
     {
       "@snowWhite": "#f4f5e2"
     },
-    "strictMode"
+    { strictMode: true }
   ],
   fix: true,
+
+  accept: [
+    {
+      code: "a { box-shadow: 0 1px 2px rgb(broken, 0.3); }",
+      description: "non-parsable colors should be ignored"
+    }
+  ],
 
   reject: [
     {
