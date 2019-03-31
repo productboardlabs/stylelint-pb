@@ -14,11 +14,11 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
       .join(" ")
 });
 
-const rule = function(expectation, _, context) {
+const rule = function(configuration, strictMode, context) {
   return (root, result) => {
-    if (typeof expectation !== "object" || !expectation) return;
+    if (typeof configuration !== "object" || !configuration) return;
 
-    const lookUpObject = Object.entries(expectation).reduce(
+    const lookUpObject = Object.entries(configuration).reduce(
       (acc, [key, value]) => {
         acc[value.toUpperCase()] = key;
 
@@ -43,7 +43,9 @@ const rule = function(expectation, _, context) {
       const results = colors.map(used => {
         const sanitized = color(used).hex();
         return {
-          valid: !lookUpObject[sanitized],
+          valid: lookUpObject[sanitized]
+            ? !lookUpObject[sanitized]
+            : strictMode !== "strictMode",
           suggested: lookUpObject[sanitized],
           used
         };
@@ -60,9 +62,11 @@ const rule = function(expectation, _, context) {
         });
 
         if (context.fix) {
-          failedColors.forEach(({ used, suggested }) => {
-            declaration.value = declaration.value.replace(used, suggested);
-          });
+          failedColors
+            .filter(({ suggested }) => suggested)
+            .forEach(({ used, suggested }) => {
+              declaration.value = declaration.value.replace(used, suggested);
+            });
         }
       }
     });

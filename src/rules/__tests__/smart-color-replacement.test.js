@@ -33,6 +33,10 @@ testRule(rule, {
     {
       code: "a { font-size: 3rem; }",
       description: "No color usage should be ignored"
+    },
+    {
+      code: "a { color: #333333; }",
+      description: "Color out of the config should be ignored by default"
     }
   ],
 
@@ -40,7 +44,7 @@ testRule(rule, {
     {
       code: "a { color: #f4f5e2; }",
       fixed: "a { color: @snowWhite; }",
-      description: "Should use correct variable",
+      description: "Should use correct variable not hexadecimal notation",
       message: rule.messages.expected([
         {
           used: "#f4f5e2",
@@ -52,7 +56,7 @@ testRule(rule, {
     {
       code: "a { background: rgb(244, 245, 226); }",
       fixed: "a { background: @snowWhite; }",
-      description: "Should use correct variable",
+      description: "Should use correct variable not rgb notation",
       message: rule.messages.expected([
         {
           used: "rgb(244, 245, 226)",
@@ -72,6 +76,25 @@ testRule(rule, {
     {
       code: "a { font-size: 3rem; }",
       description: "Should do nothing without config"
+    }
+  ]
+});
+
+testRule(rule, {
+  ruleName: rule.ruleName,
+  config: [
+    {
+      "@snowWhite": "#f4f5e2"
+    },
+    "strictMode"
+  ],
+  fix: true,
+
+  reject: [
+    {
+      code: "a { color: #333333; }",
+      fixed: "a { color: #333333; }",
+      description: "Any color except variables is prohibited!"
     }
   ]
 });

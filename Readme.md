@@ -3,7 +3,6 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)
 [![codecov](https://codecov.io/gh/productboardlabs/stylelint-pb/branch/master/graph/badge.svg)](https://codecov.io/gh/productboardlabs/stylelint-pb)
 
-
 Set (TODO) of our custom made rules for Stylelint. 🚀
 
 ## Story
@@ -36,6 +35,18 @@ Example configuration. 👇
         "@productboardlabs/smart-color-replacement": {
             "@snowWhite": "#f4f5e2"
         }
+    }
+}
+```
+
+You can also run this rule in **strict mode** which means that there is no other color than variable allowed!
+
+```js
+{
+    rules: {
+        "@productboardlabs/smart-color-replacement": [{
+            "@snowWhite": "#f4f5e2"
+        }, "strictMode"]
     }
 }
 ```
