@@ -6,6 +6,7 @@ const RGB_REGEX = /(rgb|rgba)\([^\)]*\)/gi;
 const HSL_REGEX = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/gi;
 
 const ruleName = "@productboard/smart-color-replacement";
+
 const messages = stylelint.utils.ruleMessages(ruleName, {
   expected: failedColors =>
     failedColors

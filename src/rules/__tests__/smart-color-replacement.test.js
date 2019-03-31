@@ -11,12 +11,28 @@ testRule(rule, {
 
   accept: [
     {
+      code: "",
+      description: "empty stylesheet"
+    },
+    {
+      code: "a {}",
+      description: "empty rule"
+    },
+    {
+      code: '@import "foo.css";',
+      description: "blockless statement"
+    },
+    {
+      code: ":global {}",
+      description: "CSS Modules global empty rule set"
+    },
+    {
       code: "a { color: @snowWhite; }",
-      description: "Variables are OK"
+      description: "Usage of correct variable"
     },
     {
       code: "a { font-size: 3rem; }",
-      description: "No variable is OK"
+      description: "No color usage should be ignored"
     }
   ],
 
@@ -24,7 +40,7 @@ testRule(rule, {
     {
       code: "a { color: #f4f5e2; }",
       fixed: "a { color: @snowWhite; }",
-      description: "Variables should be used",
+      description: "Should use correct variable",
       message: rule.messages.expected([
         {
           used: "#f4f5e2",
@@ -36,7 +52,7 @@ testRule(rule, {
     {
       code: "a { background: rgb(244, 245, 226); }",
       fixed: "a { background: @snowWhite; }",
-      description: "Variables should be used",
+      description: "Should use correct variable",
       message: rule.messages.expected([
         {
           used: "rgb(244, 245, 226)",
@@ -55,7 +71,7 @@ testRule(rule, {
   accept: [
     {
       code: "a { font-size: 3rem; }",
-      description: "No variable is OK"
+      description: "Should do nothing without config"
     }
   ]
 });
