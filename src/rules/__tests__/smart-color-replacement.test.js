@@ -1,4 +1,4 @@
-const rule = require("../index");
+const rule = require("../smart-color-replacement");
 
 testRule(rule, {
   ruleName: rule.ruleName,
@@ -25,16 +25,24 @@ testRule(rule, {
       code: "a { color: #f4f5e2; }",
       fixed: "a { color: @snowWhite; }",
       description: "Variables should be used",
-      message:
-        'Colour "#f4f5e2" should be "@snowWhite". (@productboard/smart-color-replacement)',
+      message: rule.messages.expected([
+        {
+          used: "#f4f5e2",
+          suggested: "@snowWhite"
+        }
+      ]),
       line: 1
     },
     {
       code: "a { background: rgb(244, 245, 226); }",
       fixed: "a { background: @snowWhite; }",
       description: "Variables should be used",
-      message:
-        'Colour "rgb(244, 245, 226)" should be "@snowWhite". (@productboard/smart-color-replacement)',
+      message: rule.messages.expected([
+        {
+          used: "rgb(244, 245, 226)",
+          suggested: "@snowWhite"
+        }
+      ]),
       line: 1
     }
   ]

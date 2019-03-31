@@ -1,4 +1,6 @@
 const { createPlugin } = require("stylelint");
-const rule = require("./rules");
+const rules = require("./rules");
 
-module.exports = createPlugin("@productboard/smart-color-replacement", rule);
+module.exports = Object.values(rules).map(rule =>
+  createPlugin(rule.ruleName, rule)
+);
