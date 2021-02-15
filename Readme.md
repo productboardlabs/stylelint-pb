@@ -1,4 +1,7 @@
-# Stylelint-PB
+# ⛔️ DEPRECATED
+This repository is no longer supported. Its content was moved into `frontend-pb` mono repository under the `@productboard/stylelint-plugin-custom-plugin` project.
+
+## Stylelint-PB
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)
 [![codecov](https://codecov.io/gh/productboardlabs/stylelint-pb/branch/master/graph/badge.svg)](https://codecov.io/gh/productboardlabs/stylelint-pb)
